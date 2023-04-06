@@ -16,7 +16,7 @@ bot.command('update', (ctx) => {
     }
     ctx.reply('GitHub repository updated successfully!');
     ctx.reply('Restarting Replit instance...');
-    exec('refresh', (error, stdout, stderr) => {
+    exec('node index', (error, stdout, stderr) => {
       if (error) {
         ctx.reply(`Error restarting Replit instance: ${error.message}`);
         return;
