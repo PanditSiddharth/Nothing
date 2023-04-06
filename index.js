@@ -8,11 +8,11 @@ bot.command('update', (ctx) => {
   ctx.reply('Updating GitHub repository...');
   exec("cd ./ && git fetch --all && git reset --hard origin/main", async (error, stdout, stderr) => {
     if (error) {
-      ctx.reply(`Error updating GitHub repository: ${error.message}`);
+      ctx.reply(`Error GitHub repository: ${error.message} \nPlease try one time more`);
       return;
     }
     if (stderr) {
-      ctx.reply(`Error updating GitHub repository: ${stderr}`);
+      ctx.reply(`STDError updating GitHub repository: ${stderr} \nPlease try one time more`);
       return;
     }
     ctx.reply('GitHub repository updated successfully!');
