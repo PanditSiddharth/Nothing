@@ -16,8 +16,9 @@ bot.command('update', (ctx) => {
     }
     ctx.reply('GitHub repository updated successfully!');
     ctx.reply('Restarting Replit instance...');
-    process.once('SIGINT', () => bot.stop('SIGINT'));
-    await process.once('SIGTERM', () => bot.stop('SIGTERM'));
+    bot.stop('SIGINT')
+    bot.stop('SIGTERM')
+    await sleep(5000)
     exec('node index', (error, stdout, stderr) => {
       if (error) {
         ctx.reply(`Error restarting Replit instance: ${error.message}`);
@@ -33,3 +34,6 @@ bot.command('update', (ctx) => {
 });
 
 bot.launch();
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
