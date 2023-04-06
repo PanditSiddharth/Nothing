@@ -17,10 +17,18 @@ bot.command('update', (ctx) => {
       return;
     }
     ctx.reply('GitHub repository updated successfully!');
-    ctx.reply('Restarting Replit instance...');
-    bot.stop('SIGINT')
-    bot.stop('SIGTERM')
+    
+    exec('pm2 stop all', (err, stdout, stderr) => {
+  if (err) {
+    console.error(`Error stopping processes: ${err}`);
+    return;
+  }
+  console.log('All processes stopped');
+
     await sleep(5000)
+    ctx.reply('Restarting Replit instance...');
+    // bot.stop('SIGINT')
+    // bot.stop('SIGTERM')
     exec('node index', (error, stdout, stderr) => {
       if (error) {
         ctx.reply(`Error restarting Replit instance: ${error.message}`);
