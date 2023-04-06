@@ -3,9 +3,10 @@ const { exec } = require('child_process');
 
 const bot = new Telegraf(process.env.TOKEN);
 bot.command("yo", (ctx) => ctx.reply("yo++"))
+bot.command("yoo", (ctx) => ctx.reply("yo++ hehe"))
 bot.command('update', (ctx) => {
   ctx.reply('Updating GitHub repository...');
-  exec("cd /home/runner/nothing && git fetch --all && git reset --hard origin/main", async (error, stdout, stderr) => {
+  exec("cd ./ && git fetch --all && git reset --hard origin/main", async (error, stdout, stderr) => {
     if (error) {
       ctx.reply(`Error updating GitHub repository: ${error.message}`);
       return;
